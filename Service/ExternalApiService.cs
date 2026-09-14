@@ -11,24 +11,6 @@ public ExternalApiService(HttpClient httpClient)
 {
     _httpClient = httpClient;
 }
-public async Task<TodoResponse?> GetDataAsync(string url)
-    {
-        var response = await _httpClient.GetAsync(url);
-        if (!response.IsSuccessStatusCode)
-        {
-            return null;
-        }
-        string content = await response.Content.ReadAsStringAsync();
-        var todo = JsonSerializer.Deserialize<TodoResponse>(
-        content,
-        new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        }
-);
-        return todo;
-    }
-
 public async Task<PubgMatchResponse?> GetPubgMatchAsync(string matchId)
 {
     string url =
