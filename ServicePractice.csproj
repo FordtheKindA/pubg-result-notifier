@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>6acb49e5-88c7-4609-b136-bcb831ea2aae</UserSecretsId>
+    <DefaultItemExcludes>
+      $(DefaultItemExcludes);tests/**
+    </DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,5 +18,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.*" />
   </ItemGroup>
+
+  
 
 </Project>
