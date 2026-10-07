@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
 
    
     public DbSet<SentMatches> SentMatches { get; set; }
+    public DbSet<TeamStanding> TeamStandings { get; set; }
     
 
    

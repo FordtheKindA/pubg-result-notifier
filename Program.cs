@@ -16,6 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<DiscordWebhookService>();
 builder.Services.AddHostedService<NotificationWorker>();
 builder.Services.AddSingleton<MatchResultFormatter>();
+builder.Services.AddSingleton<ScoringCalculator>();
+builder.Services.AddSingleton<StandingsCalculator>();
 var app = builder.Build();
 
 

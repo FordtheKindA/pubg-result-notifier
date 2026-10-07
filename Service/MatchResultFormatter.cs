@@ -59,7 +59,10 @@ private string FormatCreatedAt(DateTime createdAt)
                      .OrderBy(x => x.Placement))
         {
             lines.Add(
-                $"#{team.Placement} {team.TeamTag} | Kills: {team.Kills}"
+                $"#{team.Placement} {team.TeamTag} | " +
+                $"Kills: {team.Kills} ({team.KillPoints} pts) | " +
+                $"Placement: {team.PlacementPoints} pts | " +
+                $"Total: {team.MatchPoints} pts"
             );
         }
 
@@ -68,4 +71,31 @@ private string FormatCreatedAt(DateTime createdAt)
             lines
         );
     }
+     public string FormatStandings(
+    List<TeamStandingPreview> standings,
+    int matchNumber){
+            var lines = new List<string>();
+
+            lines.Add($"Standings After Match {matchNumber}");
+            lines.Add("");
+
+            int rank = 1;
+
+            foreach (var team in standings
+                        .OrderByDescending(x => x.AfterPoints)
+                        .ThenBy(x => x.TeamTag))
+            {
+                lines.Add(
+                    $"{rank}. {team.TeamTag} | " +
+                    $"{team.BeforePoints} +{team.MatchPoints} = {team.AfterPoints}"
+                );
+
+                rank++;
+            }
+
+            return string.Join(
+                Environment.NewLine,
+                lines
+            );
+}
 }
