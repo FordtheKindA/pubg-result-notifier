@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+
+# Build output
+**/bin/
+**/obj/
+
+# IDE
+.vs/
+.vscode/
+
+# Local databases and backups
+**/*.db
+**/*.db-*
+**/*.sqlite
+**/*.sqlite-*
+**/*.zip
+
+# Secrets and local configuration
+**/secrets.json
+**/.env
+**/.env.*
+**/appsettings.Development.json
+
+# Tests
+tests/
