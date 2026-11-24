@@ -13,6 +13,15 @@ public class AppDbContext : DbContext
    
     public DbSet<SentMatches> SentMatches { get; set; }
     public DbSet<TeamStanding> TeamStandings { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    base.OnModelCreating(modelBuilder);
+
+    modelBuilder.Entity<SentMatches>()
+        .HasIndex(x => new { x.TournamentId, x.MatchId })
+        .IsUnique();
+}
     
 
    

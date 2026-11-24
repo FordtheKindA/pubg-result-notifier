@@ -36,6 +36,9 @@ namespace ServicePractice.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TournamentId", "MatchId")
+                        .IsUnique();
+
                     b.ToTable("SentMatches");
                 });
 

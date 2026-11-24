@@ -76,4 +76,42 @@ public async Task<PubgTournamentResponse?> GetTournamentAsync(
     );
 }
 
+
+public async Task<PubgTournamentListResponse> GetTournamentsAsync(
+    string apiKey,
+    CancellationToken cancellationToken = default)
+{
+    const string url = "https://api.pubg.com/tournaments";
+
+    using var request = new HttpRequestMessage(
+        HttpMethod.Get, url);
+
+    request.Headers.Accept.ParseAdd(
+        "application/vnd.api+json");
+
+    request.Headers.Authorization =
+        new System.Net.Http.Headers.AuthenticationHeaderValue(
+            "Bearer", apiKey);
+
+    using var response = await _httpClient.SendAsync(
+        request,
+        cancellationToken);
+
+    response.EnsureSuccessStatusCode();
+
+    string json = await response.Content.ReadAsStringAsync(
+        cancellationToken);
+
+    return JsonSerializer.Deserialize<PubgTournamentListResponse>(
+        json,
+        new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        }
+    ) ?? throw new InvalidOperationException(
+        "PUBG Tournament response was null.");
+}
+
+
+
 }
