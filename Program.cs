@@ -11,8 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ExternalApiService>();
+
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Database connection string is missing.");
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=pubg-notifier.db"));
+    options.UseSqlite(connectionString));
 builder.Services.AddScoped<DiscordWebhookService>();
 builder.Services.AddHostedService<NotificationWorker>();
 builder.Services.AddSingleton<MatchResultFormatter>();

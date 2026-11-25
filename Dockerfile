@@ -18,7 +18,7 @@ WORKDIR /app
 
 COPY --from=build /app/publish .
 
-RUN chown app:app /app
+RUN mkdir -p /data && chown app:app /app /data
 USER app
 
 ENTRYPOINT ["dotnet", "ServicePractice.dll"]
